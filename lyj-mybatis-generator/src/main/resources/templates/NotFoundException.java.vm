@@ -1,0 +1,39 @@
+package ${package}.${packageConfig.current};
+
+import ${package}.${packageConfig.r};
+import ${package}.${packageConfig.error};
+import org.apache.catalina.servlet4preview.http.HttpServletRequest;
+import org.springframework.boot.web.servlet.error.ErrorController;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+/**
+ * <p>
+ *  主要处理404 响应JSON
+ * </p>
+ *
+ * @author ${author}
+ * @since ${date}
+ */
+@Controller
+public class NotFoundException implements ErrorController
+{
+
+    @GetMapping("/error")
+    @ResponseBody
+    public R notFound(HttpServletRequest request) throws Exception
+    {
+        Integer statusCode = (Integer) request.getAttribute("javax.servlet.error.status_code");
+        if (statusCode == 404) {
+            return R.error(Error.请求路径异常);
+        }
+        throw new Exception();
+    }
+
+    @Override
+    public String getErrorPath()
+    {
+        return "/error";
+    }
+}

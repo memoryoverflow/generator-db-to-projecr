@@ -1,0 +1,13 @@
+server:
+  port: 8190
+  servlet:
+    context-path: /generator
+
+spring:
+  # 处理404 异常，关闭资源映射，不让Mvc 自己跳转到 error 请求，直接抛出NoHandlerFoundException 异常，在全局异常捕获
+  mvc:
+    throw-exception-if-no-handler-found: true
+  resources:
+    add-mappings: false
+
+

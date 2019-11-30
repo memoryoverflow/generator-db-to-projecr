@@ -1,0 +1,30 @@
+package ${package}.${packageConfig.current};
+
+import ${package}.${packageConfig.entity}.${table.entityName};
+import ${package}.${packageConfig.mapper}.${table.mapperName};
+import ${package}.${packageConfig.service}.${table.serviceName};
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.springframework.stereotype.Service;
+import java.util.List;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.beans.factory.annotation.Autowired;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import java.util.Map;
+/**
+ * <p>
+ * $!{table.comment} 服务实现类
+ * </p>
+ *
+ * @author ${author}
+ * @since ${date}
+ */
+@Service
+@Transactional
+public class ${table.serviceImplName} extends ServiceImpl<${table.mapperName}, ${table.entityName}> implements ${table.serviceName} {
+
+    @Override
+    public Page<${table.entityName}> findList(Map<String,Object> map,Page<${table.entityName}> page)
+    {
+      return page.setRecords(baseMapper.findList(map,page));
+    }
+}

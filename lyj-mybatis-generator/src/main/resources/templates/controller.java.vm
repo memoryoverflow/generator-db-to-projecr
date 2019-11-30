@@ -1,0 +1,74 @@
+package ${package}.${packageConfig.current};
+
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import ${package}.${packageConfig.r};
+import ${package}.${packageConfig.myException};
+import ${package}.${packageConfig.baseController};
+import java.util.Map;
+
+import org.springframework.web.bind.annotation.*;
+import ${package}.${packageConfig.entity}.${table.entityName};
+import  ${package}.${packageConfig.service}.${table.serviceName};
+import org.springframework.stereotype.Controller;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+
+import java.util.Arrays;
+import java.util.List;
+
+import org.springframework.ui.Model;
+
+/**
+ * <p>
+ * $!{table.comment} 前端控制器
+ * </p>
+ *
+ * @author 永健
+ * @since ${date}
+ */
+
+@RestController
+@RequestMapping("/${table.basePath}")
+public class ${table.controllerName} extends BaseController<${table.entityName}> {
+
+    @Autowired
+    ${table.serviceName} thisService;
+
+
+    @GetMapping("/list")
+    public R list(@RequestParam Map<String, Object> param)
+    {
+        return success(thisService.findList(param,page()));
+    }
+
+
+    @PostMapping("/save")
+    public R insertSave(${table.entityName} entity)
+    {
+        return result(thisService.save(entity));
+    }
+
+
+    @PutMapping("/update")
+    public R editSave(${table.entityName} entity)
+    {
+        return result(thisService.updateById(entity));
+    }
+
+
+    @GetMapping("/selectById/{id}")
+    public R selectById(@PathVariable("id") String id)
+    {
+        return success(thisService.getById(id));
+    }
+
+
+    @DeleteMapping("/{ids}/remove")
+    public R delete(@PathVariable("ids") List<Integer> ids)
+    {
+        return result(thisService.removeByIds(ids));
+    }
+}
+
